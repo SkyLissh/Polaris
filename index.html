@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Polaris</title>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+	
+	<script src="https://unpkg.com/feather-icons"></script>
+
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<button class="toggle-theme" id="toggle-theme">
+		<i data-feather="sun" id="icon-theme"></i>
+	</button>
+
+	<header class="header">
+
+		<time class="time" id="time"></time>
+		<time class="time__date" id="date"></time> 
+
+		<div class="weather" id="weather"> 
+			<img class="weather__icon" id="weather-icon" src="assets/icons/unknown.png" alt="icon">
+			<p class="weather__temp" id="weather-temp">- ºc</p>
+			<p class="weather__desc" id="weather-desc"></p>
+		</div>
+
+		<p class="greeting" id="greeting"></p>
+	</header>
+
+	<main>
+		<form class="search__container" id="searcher" action="">
+			<div class="search">
+				<input type="search" name="search__input" class="search__input" placeholder="Search something..." autofocus autocomplete="off">
+				<button type="submit" class="search__button">
+					<i data-feather="search"></i>
+				</button>
+				<div class="search__suggestions popup__hide" id="search__popup"></div>
+			</div>
+		</form>
+
+		<div class="card__container card__container--listview">
+			<div class="card">
+				<p class="card__title bg-frost--green">dev</p>
+				<ul class="card__list">
+					<li class="card__item">
+						<a class="card__link" href="http://localhost:3000">localhost</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://github.com">Github</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://stackoverflow.com">StackOverflow</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://developer.mozilla.org">MDN</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<p class="card__title bg-frost--cyan">class</p>
+				<ul class="card__list">
+					<li class="card__item">
+						<a class="card__link" href="https://microsoft.teams.com">Teams</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://classroom.google.com/u/2/h">Classroom</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://mail.google.com/mail/u/2/#inbox">Gmail</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://udemy.com">Udemy</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<p class="card__title bg-frost--blue">social</p>
+				<ul class="card__list">
+					<li class="card__item">
+						<a class="card__link" href="https://youtube.com">YouTube</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://web.whatsapp.com">WhatsApp</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://animeflv.net">AnimeFLV</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://twitch.tv">Twitch</a>
+					</li>
+
+				</ul>
+			</div>
+
+			<div class="card">
+				<p class="card__title bg-frost--dark-blue">art</p>
+				<ul class="card__list">
+					<li class="card__item">
+						<a class="card__link" href="https://devianart.com">DevianArt</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://artstation.com">ArtStation</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://instagram.com">Instagram</a>
+					</li>
+					<li class="card__item">
+						<a class="card__link" href="https://dribbble.com">Dribbble</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card__container--iconview">
+			<ul class="card__list card__container">
+				<li class="card">
+					<a class="card__link" href="https://github.com"><i data-feather="github"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://instagram.com"><i data-feather="instagram"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://twitter.com"><i data-feather="twitter"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://youtube.com"><i data-feather="youtube"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://twitch.tv"><i data-feather="twitch"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://trello.com"><i data-feather="trello"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://dribbble.com"><i data-feather="dribbble"></i></a>
+				</li>
+				<li class="card">
+					<a class="card__link" href="https://linkedin.com"><i data-feather="linkedin"></i></a>
+				</li>
+			</ul>
+		</div>
+	</main>
+
+
+	<script>
+		feather.replace()
+	</script>
+	<script src="js/main.js"></script>
+
+<body>
+</html>
