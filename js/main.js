@@ -47,7 +47,7 @@ async function getWeather() {
 	weatherTemp.textContent = `${temperature}ºC`;
 	weatherDesc.textContent = data.weather[0].description;
 	
-	setInterval(getWeather, 1000*60*30); //Get the weather every 30 minutes
+	setTimeout(getWeather, 1000*60*30); //Get the weather every 30 minutes
 }
 
 getWeather();
@@ -65,7 +65,7 @@ function showDate() {
 	document.getElementById("time").innerText = `${hh}:${min}`;
 	document.getElementById("date").innerText = `${dddd}, ${mmmm} ${dd}`;
 
-	setInterval(showDate, 1000);
+	setTimeout(showDate, 1000);
 }
 
 showDate();
@@ -82,7 +82,7 @@ function showGreeting() {
 	else if (hour >= 12 && hour < 19) greet.innerText = `Good Afternoon, ${name}`;
 	else greet.innerText = `Good Evening, ${name}`;
 
-	setInterval(showGreeting, 1000*60);
+	setTimeout(showGreeting, 1000*60);
 }
 
 showGreeting();
