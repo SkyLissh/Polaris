@@ -101,20 +101,20 @@ function suggestionPopup(searcher) {
 let index = -1;
 searcher.addEventListener("keyup", (e) => {
 	if (e.target === searcher.search__input) {
-		let term = e.target.value.toLowerCase();
 		const popup = document.getElementById("search__popup");
 		let termList;
+
+		if (e.key != "ArrowDown" && e.key != "ArrowUp") {
+			index = -1;
+			suggestionPopup(e.target);
+			getSuggestions(e.target.value);
+		}
 
 		if (popup.children[0] != undefined) termList = popup.children[0].children; 
 
 		if (index < -1 || index > 5) index = -1;
-		showPopup(termList, e)
+		if (e.key === "ArrowDown" || e.key === "ArrowUp") showPopup(termList, e)
 
-		if (e.key != "ArrowDown" && e.key != "ArrowUp") {
-			suggestionPopup(e.target);
-			term = term.replaceAll(" ", "+");
-			getSuggestions(term);
-		}
 	}
 });
 
@@ -130,8 +130,8 @@ function showPopup(termList, event) {
 		termList[index].classList.add("selected");
 
 	} else if (event.key === "ArrowUp" && termList) {
-		if (index === -1) index = 4;
 		if (index === 0) index = 5;
+		if (index === -1) index = 4;
 
 		index--;
 
@@ -153,7 +153,8 @@ searcher.addEventListener("blur", () => {
 }, true)
 
 async function getSuggestions(term) {
-	let url = `http://suggestqueries.google.com/complete/search?client=firefox&q=${term}&hl=en&callback=showSuggestions` // Google suggestions
+	const searchTerm = term.toLowerCase();
+	let url = `http://suggestqueries.google.com/complete/search?client=firefox&q=${searchTerm.replaceAll(" ", "+")}&hl=en&callback=showSuggestions` // Google suggestions
 
 	addScript(url);
 }
