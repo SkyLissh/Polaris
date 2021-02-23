@@ -32,12 +32,13 @@ const weatherIcon = document.getElementById("weather-icon");
 const weatherTemp = document.getElementById("weather-temp");
 const weatherDesc = document.getElementById("weather-desc");
 
-const apiKey = "5197658edc0a8d61d04c630f4ad2831a";
-const cityName = "oaxaca";
 
-async function getWeather() {
+async function getWeather(position) {
+	const apiKey = "5197658edc0a8d61d04c630f4ad2831a";
+	const lat = position.coords.latitude;
+	const lon = position.coords.longitude;
 
-	const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`);
+	const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
 
 	const data = await res.json();
 	const temperature = Math.round(data.main.temp);
@@ -50,7 +51,7 @@ async function getWeather() {
 	setTimeout(getWeather, 1000*60*30); //Get the weather every 30 minutes
 }
 
-getWeather();
+if (navigator.geolocation) navigator.geolocation.getCurrentPosition(getWeather);
 
 // Time & Date
 function showDate() {
