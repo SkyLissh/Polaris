@@ -1,3 +1,44 @@
+// Setup Modal
+const doneButton = document.getElementById("done-setup");
+const nameInput = document.getElementById("name-input");
+const searchEngines = document.getElementById("search-engines"); 
+
+let engine;
+
+searchEngines.addEventListener("click", (ev) => {
+	if (ev.target.parentNode.classList.contains("button")) {
+		const button = ev.target.parentNode;
+		
+		radioButtons(button, searchEngines);
+	} else if (ev.target.classList.contains("button")) {
+		const button = ev.target;
+
+		radioButtons(button, searchEngines);
+	}
+})
+
+function radioButtons(button, listNodes) {
+	listNodes.childNodes.forEach((item) => {
+		if (item.classList) {
+			if (item.classList.contains("selected") && item != button) {
+				item.classList.remove("selected");
+			}
+		}
+	})
+
+	button.classList.add("selected");
+}
+
+doneButton.addEventListener("click", () => {
+	searchEngines.childNodes.forEach((item) => {
+		if (item.classList) {
+			if (item.classList.contains("selected")) engine = item.id;
+		}
+	})
+
+	console.log(engine);
+})
+
 // Toggle Theme
 const toggleButton = document.getElementById("toggle-theme");
 const iconTheme = document.getElementById("icon-theme")
@@ -101,7 +142,7 @@ function suggestionPopup(searcher) {
 // Searcher suggestions
 let index = -1;
 searcher.addEventListener("keyup", (e) => {
-	if (e.target === searcher.search__input) {
+	if (e.target === searcher.field__input) {
 		const popup = document.getElementById("search__popup");
 		let termList;
 
@@ -146,6 +187,7 @@ function showPopup(termList, event) {
 	if (index > -1 && index < 5) {
 		let text = termList[index].children[0].textContent;
 		event.target.value = text;
+		console.log(event.target.value)
 	}
 }
 
@@ -164,12 +206,12 @@ function showSuggestions(data) {
 	const suggestions = data[1].slice(0, 5);
 	const suggList = document.getElementById("search__popup");
 	suggList.innerHTML = `
-		<ul class="search__suggestion-list">
+		<ul class="field__suggestion-list">
 			${suggestions.map((sugg) => {
 				return `
-				<li class="search__suggestion">
+				<li class="field__suggestion">
 					<a 
-						class="search__suggestion-link" 
+						class="field__suggestion-link" 
 						href="https://www.duckduckgo.com/?q=${sugg.replaceAll(" ", "+")}">${sugg}</a>
 				</li>
 				`;
