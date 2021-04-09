@@ -152,20 +152,30 @@
 			<p class="modal__title">Setup</p>
 			<div class="modal__content">
 
-				<form autocomplete="off">
+				<form id="setup-modal" autocomplete="off">
+
 					<div class="field">
 						<i class="field__icon" data-feather="user"></i>
 						<input id="name-input" type="text" class="field__input" placeholder="Name">
 					</div>
+
+					<p class="modal__subtitle">Search Engine</p>
+					<div class="engine-options">
+						<div class="button__radio">
+							<input class="input__radio" type="radio" name="engine" id="google-engine" value="google">
+							<label class="button label__radio" for="google-engine"><img src="./assets/logos/google-logo.png"></label>
+						</div>
+						<div class="button__radio">
+							<input class="input__radio" type="radio" name="engine" id="duck-engine" value="duckduckgo">
+							<label class="button label__radio" for="duck-engine"><img src="./assets/logos/duckduckgo-logo.png"></label>
+						</div>
+						<div class="button__radio">
+							<input class="input__radio" type="radio" name="engine" id="bing-engine" value="bing">
+							<label class="button label__radio" for="bing-engine"><img src="./assets/logos/bing-logo.png"></label>
+						</div>
+					</div>
 				</form>
 
-				<div id="search-engines" class="modal__section">
-					<p class="modal__subtitle">Search Engine</p>
-					<button id="google" class="button button__fab"><img src="./assets/logos/google-logo.png"></button>
-					<button id="duckduckgo" class="button button__fab"><img src="./assets/logos/duckduckgo-logo.png"></button>
-					<button id="bing" class="button button__fab"><img src="./assets/logos/bing-logo.png"></button>
-				</div>
-				<!-- <button class="button button__fab"><img src="https://cdn.worldvectorlogo.com/logos/bing-2.svg"></button> -->
 
 			</div>
 			<div class="modal__footer">

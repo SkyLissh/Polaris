@@ -1,43 +1,43 @@
 // Setup Modal
 const doneButton = document.getElementById("done-setup");
-const nameInput = document.getElementById("name-input");
-const searchEngines = document.getElementById("search-engines"); 
+// const nameInput = document.getElementById("name-input");
+const setupModal = document.getElementById("setup-modal");
+const modal = document.getElementById("modal");
 
-let engine;
+let username = localStorage.getItem("name");
+let engine = localStorage.getItem("engine");
 
-searchEngines.addEventListener("click", (ev) => {
-	if (ev.target.parentNode.classList.contains("button")) {
-		const button = ev.target.parentNode;
-		
-		radioButtons(button, searchEngines);
-	} else if (ev.target.classList.contains("button")) {
-		const button = ev.target;
+if (username && engine) {
+	modal.remove();
+} else {
+	setupModal.addEventListener("input", (ev) => {
+		if (ev.target.classList.contains("field__input")) username = ev.target.value
+		if (ev.target.classList.contains("input__radio")) engine = ev.target.value
 
-		radioButtons(button, searchEngines);
-	}
-})
-
-function radioButtons(button, listNodes) {
-	listNodes.childNodes.forEach((item) => {
-		if (item.classList) {
-			if (item.classList.contains("selected") && item != button) {
-				item.classList.remove("selected");
-			}
+		if (username != "" && engine) {
+			doneButton.disabled = false
+		} else {
+			doneButton.disabled = true
 		}
 	})
 
-	button.classList.add("selected");
+	doneButton.addEventListener("click", () => {
+		localStorage.setItem("name", username);
+		localStorage.setItem("engine", engine)
+		modal.remove();
+	})
 }
 
-doneButton.addEventListener("click", () => {
-	searchEngines.childNodes.forEach((item) => {
-		if (item.classList) {
-			if (item.classList.contains("selected")) engine = item.id;
-		}
-	})
+
+function doneSetup() {
+	// searchEngines.childNodes.forEach((item) => {
+	// 	if (item.classList) {
+	// 		if (item.classList.contains("selected")) engine = item.id;
+	// 	}
+	// })
 
 	console.log(engine);
-})
+}
 
 // Toggle Theme
 const toggleButton = document.getElementById("toggle-theme");
@@ -116,13 +116,12 @@ showDate();
 function showGreeting() {
 	const hour = new Date().getHours();
 
-	const name = "Alisson";
 	const greet = document.getElementById("greeting");
 
-	if (hour >= 23 || hour < 5) greet.innerText = `You should sleep a bit, ${name}`;
-	else if (hour >= 6 && hour < 12) greet.innerText = `Good Morning, ${name}`;
-	else if (hour >= 12 && hour < 19) greet.innerText = `Good Afternoon, ${name}`;
-	else greet.innerText = `Good Evening, ${name}`;
+	if (hour >= 23 || hour < 5) greet.innerText = `You should sleep a bit, ${username}`;
+	else if (hour >= 6 && hour < 12) greet.innerText = `Good Morning, ${username}`;
+	else if (hour >= 12 && hour < 19) greet.innerText = `Good Afternoon, ${username}`;
+	else greet.innerText = `Good Evening, ${username}`;
 
 	setTimeout(showGreeting, 1000*60);
 }
@@ -205,6 +204,20 @@ async function getSuggestions(term) {
 function showSuggestions(data) {
 	const suggestions = data[1].slice(0, 5);
 	const suggList = document.getElementById("search__popup");
+
+	let url;
+
+	switch (engine) {
+		case "google":
+			url = "https://www.google.com/search?q="
+			break;
+		case "duckduckgo":
+			url = "https://www.duckduckgo.com/?q="
+			break
+		case "bing":
+			url = "https://www.bing.com/search?q="
+	}
+
 	suggList.innerHTML = `
 		<ul class="field__suggestion-list">
 			${suggestions.map((sugg) => {
@@ -212,7 +225,7 @@ function showSuggestions(data) {
 				<li class="field__suggestion">
 					<a 
 						class="field__suggestion-link" 
-						href="https://www.duckduckgo.com/?q=${sugg.replaceAll(" ", "+")}">${sugg}</a>
+						href="${url}${sugg.replaceAll(" ", "+")}">${sugg}</a>
 				</li>
 				`;
 			}).join('')}
@@ -232,7 +245,19 @@ function addScript(url) {
 }
 
 searcher.addEventListener("submit", (e) => {
+	let searchWith;
+
+	switch (engine) {
+		case "google":
+			searchWith = "https://www.google.com/search?q="
+			break;
+		case "duckduckgo":
+			searchWith = "https://www.duckduckgo.com/?q="
+			break
+		case "bing":
+			searchWith = "https://www.bing.com/search?q="
+	}
 	e.preventDefault();
-	window.location.href =`https://duckduckgo.com/?q=${e.target.search__input.value}`;
+	window.location.href =`${searchWith}${e.target.field__input.value}`;
 })
 
