@@ -1,3 +1,9 @@
+function main() {
+	if (navigator.geolocation) navigator.geolocation.getCurrentPosition(getWeather);
+	showDate();
+	showGreeting();
+}
+
 // Setup Modal
 const doneButton = document.getElementById("done-setup");
 // const nameInput = document.getElementById("name-input");
@@ -8,6 +14,7 @@ let username = localStorage.getItem("name");
 let engine = localStorage.getItem("engine");
 
 if (username && engine) {
+	main();
 	modal.remove();
 } else {
 	setupModal.addEventListener("input", (ev) => {
@@ -23,21 +30,12 @@ if (username && engine) {
 
 	doneButton.addEventListener("click", () => {
 		localStorage.setItem("name", username);
-		localStorage.setItem("engine", engine)
+		localStorage.setItem("engine", engine);
+		main();
 		modal.remove();
 	})
 }
 
-
-function doneSetup() {
-	// searchEngines.childNodes.forEach((item) => {
-	// 	if (item.classList) {
-	// 		if (item.classList.contains("selected")) engine = item.id;
-	// 	}
-	// })
-
-	console.log(engine);
-}
 
 // Toggle Theme
 const toggleButton = document.getElementById("toggle-theme");
@@ -92,7 +90,6 @@ async function getWeather(position) {
 	setTimeout(getWeather, 1000*60*30); //Get the weather every 30 minutes
 }
 
-if (navigator.geolocation) navigator.geolocation.getCurrentPosition(getWeather);
 
 // Time & Date
 function showDate() {
@@ -110,7 +107,6 @@ function showDate() {
 	setTimeout(showDate, 1000);
 }
 
-showDate();
 
 //Greeting
 function showGreeting() {
@@ -126,7 +122,6 @@ function showGreeting() {
 	setTimeout(showGreeting, 1000*60);
 }
 
-showGreeting();
 
 // Searcher
 const searcher = document.getElementById("searcher");
