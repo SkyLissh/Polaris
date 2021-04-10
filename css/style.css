@@ -440,9 +440,16 @@ body {
 	display: block;
 }
 
+.search__form {
+	width: 90%;
+}
+
 @media (min-width: 600px) {
 	.search__input {
 		font-size: 1.1rem;
+	}
+	.search__form {
+		width: 85%;
 	}
 }
 
