@@ -185,9 +185,11 @@ function showPopup(termList, event) {
 	}
 }
 
-searcher.addEventListener("blur", () => {
-	document.getElementById("search__popup").classList.add("popup__hide");
-}, true)
+searcher.addEventListener("focusout", (ev) => {
+	const searchPopup = document.getElementById("search__popup");
+
+	setTimeout(() => searchPopup.classList.add("popup__hide"), 100);
+})
 
 async function getSuggestions(term) {
 	const searchTerm = term.toLowerCase();
